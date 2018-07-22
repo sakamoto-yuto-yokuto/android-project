@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    flavorDimensions "default"
+
+    defaultConfig {
+        applicationId "jp.co.sakamoto.androidproject"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0.0"
+
+        buildConfigField 'String', 'URL_BASE', '"http://your.url.base/"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    productFlavors {
+        develop {
+            applicationIdSuffix ".dev"
+        }
+        staging {
+            applicationIdSuffix ".stg"
+        }
+        product { }
+    }
+}
+
+apply plugin: 'me.tatarka.retrolambda'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:support-v4:27.+'
+    implementation 'com.android.support:appcompat-v7:27.+'
+    implementation 'com.android.support:recyclerview-v7:27.+'
+    implementation 'com.android.support:design:27.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testCompile 'junit:junit:4.12'
+    implementation 'com.github.gfx.android.orma:orma:4.1.0'
+    annotationProcessor 'com.github.gfx.android.orma:orma-processor:4.1.0'
+    implementation 'com.google.dagger:dagger:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.11'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+}
+//apply plugin: 'com.google.gms.google-services'
