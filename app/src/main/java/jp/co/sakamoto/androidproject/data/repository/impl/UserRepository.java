@@ -14,16 +14,16 @@ import jp.co.sakamoto.androidproject.domain.model.LoginChallenge;
 import jp.co.sakamoto.androidproject.domain.model.LoginResult;
 import jp.co.sakamoto.androidproject.domain.model.SaveUserResult;
 import jp.co.sakamoto.androidproject.framework.retrofit.ApiInterface;
-import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class UserRepository implements IUserRepository {
     private CompositeDisposable subscriptions = new CompositeDisposable();
     private OrmaDatabase db;
     private ApiInterface apiInterface;
 
-    public UserRepository(OrmaDatabase db, ApiInterface apiInterface) {
+    public UserRepository(OrmaDatabase db, Retrofit retrofit) {
         this.db = db;
-        this.apiInterface = apiInterface;
+        this.apiInterface = retrofit.create(ApiInterface.class);
     }
 
     @Override
@@ -48,6 +48,9 @@ public class UserRepository implements IUserRepository {
                         result = LoginResult.newInstance(LoginResult.RESULT_NG, Message.DEFAULT_ERROR, null);
                     }
                     emitter.onSuccess(result);
+                }, e -> {
+                    e.printStackTrace();
+                    if (!emitter.isDisposed()) emitter.onError(e);
                 });
                 this.subscriptions.add(disposable);
             } catch (Exception e) {

@@ -36,12 +36,18 @@ android {
         staging {
             applicationIdSuffix ".stg"
         }
-        product { }
+        product {}
+    }
+
+    // Deep Linkを使用するならコメント
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+        baseline file("lint-baseline.xml")
     }
 }
 
 ext.support_version = "28.0.0"
-ext.play_service_version = "15.0.1"
+ext.play_service_version = "16.0.0"
 ext.dagger_version = "2.17"
 ext.retrofit_version = "2.4.0"
 ext.orma_version = "5.0.2"
@@ -60,10 +66,14 @@ dependencies {
 
     // rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
 
     // dagger
     implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
 
     // retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -91,3 +101,4 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 //apply plugin: 'com.google.gms.google-services'
+

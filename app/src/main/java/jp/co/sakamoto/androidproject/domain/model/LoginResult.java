@@ -1,8 +1,8 @@
 package jp.co.sakamoto.androidproject.domain.model;
 
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
 
-import io.reactivex.annotations.NonNull;
+import com.google.gson.annotations.SerializedName;
 
 public class LoginResult {
     public static final String RESULT_OK = "OK";

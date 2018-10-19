@@ -4,14 +4,11 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import jp.co.sakamoto.androidproject.data.entity.User;
 import jp.co.sakamoto.androidproject.data.repository.IUserRepository;
 import jp.co.sakamoto.androidproject.definition.Message;
-import jp.co.sakamoto.androidproject.domain.model.GetUserResult;
 import jp.co.sakamoto.androidproject.domain.model.LoginChallenge;
 import jp.co.sakamoto.androidproject.domain.model.LoginResult;
-import jp.co.sakamoto.androidproject.domain.model.SaveUserResult;
 
 public class LoginUser extends Usecase {
     private IUserRepository userRepository;

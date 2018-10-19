@@ -5,6 +5,8 @@ import android.databinding.ObservableField;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 import jp.co.sakamoto.androidproject.domain.model.LoginChallenge;
 import jp.co.sakamoto.androidproject.domain.usecase.LoginUser;
 import jp.co.sakamoto.androidproject.presentation.viewmodel.ViewModel;
@@ -19,12 +21,14 @@ public class MainActivityViewModel extends ViewModel {
     public final ObservableField<String> token = new ObservableField<>();
     public final ObservableField<Boolean> isLoading = new ObservableField<>(false);
 
+    public final Subject<Boolean> skipCommand = PublishSubject.create();
+
     @Inject
     public MainActivityViewModel(LoginUser loginUser) {
         this.loginUser = loginUser;
     }
 
-    public void loginCommand() {
+    public void login() {
         if (userId.get() == null || userId.get().isEmpty() || password.get() == null || password.get().isEmpty()) {
             result.set(null);
             message.set("ユーザーID、パスワードを入力してください。");
@@ -36,8 +40,17 @@ public class MainActivityViewModel extends ViewModel {
                 message.set(resultModel.getMessage());
                 token.set(resultModel.getToken());
                 isLoading.set(false);
+            }, e -> {
+                result.set(null);
+                message.set("エラーが発生しました。");
+                token.set(null);
+                isLoading.set(false);
             });
             this.subscriptions.add(disposable);
         }
+    }
+
+    public void skip() {
+        this.skipCommand.onNext(true);
     }
 }
