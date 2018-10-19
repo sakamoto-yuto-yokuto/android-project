@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import io.reactivex.disposables.CompositeDisposable;
-import jp.co.sakamoto.androidproject.presentation.PauseHandler;
+import jp.co.sakamoto.androidproject.presentation.view.helper.PauseHandler;
 
 public class BaseActivity extends AppCompatActivity {
     protected CompositeDisposable subscriptions = new CompositeDisposable();
