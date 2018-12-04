@@ -24,7 +24,7 @@ public class ToolListAdapter extends RecyclerView.Adapter<ToolListAdapter.ViewHo
             this.viewModels.clear();
         } else {
             this.viewModels = Observable.fromIterable(entities)
-                    .map(entity -> ToolListItemViewModel.newInstance(entity.getName()))
+                    .map(entity -> new ToolListItemViewModel(entity.getName()))
                     .toList()
                     .blockingGet();
         }

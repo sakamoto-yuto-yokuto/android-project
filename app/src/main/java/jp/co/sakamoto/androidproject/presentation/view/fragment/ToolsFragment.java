@@ -78,6 +78,11 @@ public class ToolsFragment extends BaseFragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         // onResumeでRecyclerViewのスクロールの監視を開始し、購読する

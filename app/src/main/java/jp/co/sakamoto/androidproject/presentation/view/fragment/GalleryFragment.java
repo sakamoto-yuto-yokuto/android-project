@@ -63,4 +63,9 @@ public class GalleryFragment extends BaseFragment {
 
         return this.binding.getRoot();
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 }

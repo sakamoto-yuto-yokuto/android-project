@@ -6,7 +6,7 @@ import android.os.Message;
 import java.util.Vector;
 
 public abstract class PauseHandler extends Handler {
-    final Vector<Message> messageQueueBuffer = new Vector<>();
+    private final Vector<Message> messageQueueBuffer = new Vector<>();
 
     private boolean paused;
 

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.github.gfx.android.orma.annotation.Column;
 import com.github.gfx.android.orma.annotation.PrimaryKey;
+import com.github.gfx.android.orma.annotation.Setter;
 import com.github.gfx.android.orma.annotation.Table;
 
 @Table
@@ -20,20 +21,14 @@ public class User {
     @Nullable
     private String token;
 
-    public static User newInstance(@NonNull String id, @NonNull String password, @NonNull String token) {
-        User user = new User();
-        user.id = id;
-        user.password = password;
-        user.token = token;
-        return user;
+    public User(@Setter @NonNull String id, @Setter String password, @Setter String token) {
+        this.id = id;
+        this.password = password;
+        this.token = token;
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPassword() {

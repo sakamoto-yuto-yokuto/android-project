@@ -53,7 +53,6 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
                 R.string.drawer_open,
                 R.string.drawer_close);
         this.binding.drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
         this.binding.navigationView.setNavigationItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.menu_item1:
@@ -72,8 +71,8 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
             this.binding.drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+        toggle.syncState();
 
-        this.toolsFragment = ToolsFragment.newInstance();
         // BottomNavigation Setting
         this.binding.bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
@@ -87,7 +86,7 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
                     Log.d(TAG, "Item 3 Selected!");
                     break;
                 case R.id.nav_manage:
-                    if (this.binding.bottomNavigation.getSelectedItemId() == R.id.nav_manage) {
+                    if (this.toolsFragment == null || this.binding.bottomNavigation.getSelectedItemId() == R.id.nav_manage) {
                         this.toolsFragment = ToolsFragment.newInstance();
                     }
                     replaceContainer(this.toolsFragment);

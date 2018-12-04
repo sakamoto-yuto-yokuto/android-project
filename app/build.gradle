@@ -15,7 +15,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,18 +32,23 @@ android {
     productFlavors {
         develop {
             applicationIdSuffix ".dev"
+            buildConfigField 'String', 'URL_BASE', '"http://your.url.base/"'
         }
         staging {
             applicationIdSuffix ".stg"
+            buildConfigField 'String', 'URL_BASE', '"http://your.url.base/"'
         }
         product {}
     }
-
-    // Deep Linkを使用するならコメント
-    lintOptions {
-        disable 'GoogleAppIndexingWarning'
-        baseline file("lint-baseline.xml")
+    // RxJavaとRxJava2が混在している場合に必要
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
     }
+    //TODO: Deep Linkを使用しないならコメントアウト解除
+//    lintOptions {
+//        disable 'GoogleAppIndexingWarning'
+//        baseline file("lint-baseline.xml")
+//    }
 }
 
 ext.support_version = "28.0.0"
@@ -65,8 +70,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$play_service_version"
 
     // rxjava
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
-    implementation 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
+    implementation "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0"
 
     // dagger
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -86,16 +91,16 @@ dependencies {
     annotationProcessor "com.github.maskarade.android.orma:orma-processor:$orma_version"
 
     // gif drawable
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.11'
+    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.11"
 
     // zxing
-    implementation 'com.google.zxing:core:3.3.0'
+    implementation "com.google.zxing:core:3.3.0"
 
     // unit test
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:2.2.2", {
+        exclude group: "com.android.support", module: "support-annotations"
     })
-    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation "junit:junit:4.12"
 
     // local lib
     implementation fileTree(include: ['*.jar'], dir: 'libs')

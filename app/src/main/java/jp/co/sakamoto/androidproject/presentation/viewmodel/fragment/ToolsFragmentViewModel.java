@@ -26,7 +26,7 @@ public class ToolsFragmentViewModel extends ViewModel {
     public void getFirstData() {
         List<Tool> list = new ArrayList<>();
         for (int index = 0; index < FIRST_LOAD_DATA_COUNT; index++) {
-            list.add(Tool.newInstance(String.valueOf(index), "Tool " + index));
+            list.add(new Tool(String.valueOf(index), "Tool " + index));
         }
         this.tools.set(list);
     }
@@ -36,7 +36,7 @@ public class ToolsFragmentViewModel extends ViewModel {
             int startIndex = FIRST_LOAD_DATA_COUNT + pageIndex * ADD_PAGE_ITEM_COUNT;
             int endCount = startIndex + ADD_PAGE_ITEM_COUNT + 1;
             for (int index = startIndex; index < endCount; index++) {
-                this.tools.get().add(Tool.newInstance(String.valueOf(index), "Tool " + index));
+                this.tools.get().add(new Tool(String.valueOf(index), "Tool " + index));
             }
             this.tools.notifyChange();
             pageIndex++;

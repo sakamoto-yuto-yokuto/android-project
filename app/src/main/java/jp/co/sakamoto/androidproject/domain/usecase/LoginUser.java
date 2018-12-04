@@ -21,7 +21,7 @@ public class LoginUser extends Usecase {
     public Single<LoginResult> login(LoginChallenge model) {
         return this.userRepository.login(model).flatMap(loginResult -> Single.create(emitter -> {
             if (loginResult.isSuccess()) {
-                User user = User.newInstance(model.getUserId(), model.getPassword(), loginResult.getToken());
+                User user = new User(model.getUserId(), model.getPassword(), loginResult.getToken());
                 Disposable disposable = this.userRepository.saveUser(user).subscribe(saveUserResult -> {
                     String result = saveUserResult.isSuccess() ? LoginResult.RESULT_OK : LoginResult.RESULT_NG;
                     String message = saveUserResult.isSuccess() ? Message.LOGIN_SUCCESS : saveUserResult.getMessage();

@@ -16,8 +16,24 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <!-- Deep Link [ andtmp://main ] でMainActivityに遷移 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="main" android:scheme="andtmp"/>
+            </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.activity.SecondActivity" android:launchMode="singleTask"/>
+        <activity android:name=".presentation.view.activity.SecondActivity" android:launchMode="singleTask">
+            <!-- Deep Link [ andtmp://main/second ] でSecondActivityに遷移 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="main" android:scheme="andtmp" android:pathPrefix="/second"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

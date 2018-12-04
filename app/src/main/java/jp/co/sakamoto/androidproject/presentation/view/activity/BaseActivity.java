@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import io.reactivex.disposables.CompositeDisposable;
 import jp.co.sakamoto.androidproject.presentation.view.helper.PauseHandler;
 
-public class BaseActivity extends AppCompatActivity {
+abstract public class BaseActivity extends AppCompatActivity {
     protected CompositeDisposable subscriptions = new CompositeDisposable();
 
     @SuppressLint("HandlerLeak")

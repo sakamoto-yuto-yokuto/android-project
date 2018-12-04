@@ -21,7 +21,7 @@ public class GalleryFragmentViewModel extends ViewModel {
     public void getGalleries() {
         List<Gallery> list = new ArrayList<>();
         for (int index = 0; index < 100; index++) {
-            list.add(Gallery.newInstance(String.valueOf(index), "Gallery " + index));
+            list.add(new Gallery(String.valueOf(index), "Gallery " + index));
         }
         galleries.set(list);
     }

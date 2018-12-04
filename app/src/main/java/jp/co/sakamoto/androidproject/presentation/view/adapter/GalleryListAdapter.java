@@ -24,7 +24,7 @@ public class GalleryListAdapter extends RecyclerView.Adapter<GalleryListAdapter.
             this.viewModels.clear();
         } else {
             this.viewModels = Observable.fromIterable(entities)
-                    .map(entity -> GalleryListItemViewModel.newInstance(entity.getName()))
+                    .map(entity -> new GalleryListItemViewModel(entity.getName()))
                     .toList()
                     .blockingGet();
         }
