@@ -32,11 +32,11 @@ android {
     productFlavors {
         develop {
             applicationIdSuffix ".dev"
-            buildConfigField 'String', 'URL_BASE', '"http://your.url.base/"'
+            buildConfigField 'String', 'URL_BASE', '"http://your.url.base.dev/"'
         }
         staging {
             applicationIdSuffix ".stg"
-            buildConfigField 'String', 'URL_BASE', '"http://your.url.base/"'
+            buildConfigField 'String', 'URL_BASE', '"http://your.url.base.stg/"'
         }
         product {}
     }
@@ -52,7 +52,8 @@ android {
 }
 
 ext.support_version = "28.0.0"
-ext.play_service_version = "16.0.0"
+ext.play_service_version = "16.1.0"
+ext.play_service_location_version = "16.0.0"
 ext.dagger_version = "2.17"
 ext.retrofit_version = "2.4.0"
 ext.orma_version = "5.0.2"
@@ -67,10 +68,10 @@ dependencies {
 
     // play service
     implementation "com.google.android.gms:play-services-gcm:$play_service_version"
-    implementation "com.google.android.gms:play-services-location:$play_service_version"
+    implementation "com.google.android.gms:play-services-location:$play_service_location_version"
 
     // rxjava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
     implementation "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0"
 
     // dagger
