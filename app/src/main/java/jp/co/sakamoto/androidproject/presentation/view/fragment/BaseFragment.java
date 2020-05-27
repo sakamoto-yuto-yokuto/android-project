@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment implements Disposable {
     protected CompositeDisposable subscriptions = new CompositeDisposable();
 
     @Override
@@ -27,6 +28,16 @@ public class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.subscriptions.dispose();
+    }
+
+    @Override
+    public void dispose() {
+        if (!this.subscriptions.isDisposed())
+            this.subscriptions.dispose();
+    }
+
+    @Override
+    public boolean isDisposed() {
+        return this.subscriptions.isDisposed();
     }
 }

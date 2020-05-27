@@ -35,6 +35,7 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
 
     private ActivitySecondBinding binding;
     private ToolsFragment toolsFragment;
+    private GalleryFragment galleryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +78,27 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
         this.binding.bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.nav_camera:
-                    replaceContainer(GalleryFragment.newInstance());
+                    if (this.galleryFragment != null && !this.galleryFragment.isDisposed())
+                        this.galleryFragment.dispose();
+
+                    this.galleryFragment = GalleryFragment.newInstance();
+                    replaceContainer(this.galleryFragment);
                     break;
                 case R.id.nav_gallery:
-                    replaceContainer(GalleryFragment.newInstance());
+                    if (this.galleryFragment != null && !this.galleryFragment.isDisposed())
+                        this.galleryFragment.dispose();
+
+                    this.galleryFragment = GalleryFragment.newInstance();
+                    replaceContainer(this.galleryFragment);
                     break;
                 case R.id.nav_slideshow:
                     Log.d(TAG, "Item 3 Selected!");
                     break;
                 case R.id.nav_manage:
                     if (this.toolsFragment == null || this.binding.bottomNavigation.getSelectedItemId() == R.id.nav_manage) {
+                        if (this.toolsFragment != null && !this.toolsFragment.isDisposed())
+                            this.toolsFragment.dispose();
+
                         this.toolsFragment = ToolsFragment.newInstance();
                     }
                     replaceContainer(this.toolsFragment);
@@ -107,5 +119,15 @@ public class SecondActivity extends BaseActivity implements HasSupportFragmentIn
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (this.toolsFragment != null && !this.toolsFragment.isDisposed())
+            this.toolsFragment.dispose();
+
+        if (this.galleryFragment != null && !this.galleryFragment.isDisposed())
+            this.galleryFragment.dispose();
     }
 }

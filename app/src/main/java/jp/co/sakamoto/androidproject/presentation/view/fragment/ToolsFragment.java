@@ -59,7 +59,7 @@ public class ToolsFragment extends BaseFragment {
             this.binding.setViewModel(this.viewModel);
 
             this.adapter = new ToolListAdapter();
-            this.linearLayoutManager = new LinearLayoutManager(getActivity());
+            this.linearLayoutManager = new LinearLayoutManager(getContext());
             this.binding.recyclerView.setLayoutManager(this.linearLayoutManager);
             this.binding.recyclerView.setAdapter(this.adapter);
             this.viewModel.tools.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {

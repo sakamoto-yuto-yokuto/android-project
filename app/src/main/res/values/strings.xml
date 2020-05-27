@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android-project</string>
+    <string name="app_name">Study App</string>
 
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>

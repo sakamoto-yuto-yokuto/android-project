@@ -50,7 +50,7 @@ public class GalleryFragment extends BaseFragment {
         this.binding.setViewModel(this.viewModel);
 
         this.adapter = new GalleryListAdapter();
-        this.binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        this.binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         this.binding.recyclerView.setAdapter(this.adapter);
         this.viewModel.galleries.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override

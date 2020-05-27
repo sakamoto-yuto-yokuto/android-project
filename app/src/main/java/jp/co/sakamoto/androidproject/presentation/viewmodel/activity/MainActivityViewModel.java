@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -35,17 +36,19 @@ public class MainActivityViewModel extends ViewModel {
             token.set(null);
         } else {
             isLoading.set(true);
-            Disposable disposable = this.loginUser.login(LoginChallenge.newInstance(userId.get(), password.get())).subscribe(resultModel -> {
-                result.set(resultModel.getResult());
-                message.set(resultModel.getMessage());
-                token.set(resultModel.getToken());
-                isLoading.set(false);
-            }, e -> {
-                result.set(null);
-                message.set("エラーが発生しました。");
-                token.set(null);
-                isLoading.set(false);
-            });
+            Disposable disposable =this.loginUser.login(LoginChallenge.newInstance(userId.get(), password.get()))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(resultModel -> {
+                        result.set(resultModel.getResult());
+                        message.set(resultModel.getMessage());
+                        token.set(resultModel.getToken());
+                        isLoading.set(false);
+                    }, e -> {
+                        result.set(null);
+                        message.set("エラーが発生しました。");
+                        token.set(null);
+                        isLoading.set(false);
+                    });
             this.subscriptions.add(disposable);
         }
     }
